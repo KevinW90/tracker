@@ -1,0 +1,42 @@
+.bug-card {
+  max-width: 300px;
+  display: grid;
+  grid-template-areas: "title       title       title"
+                       "status      status      status"
+                       "description description description";
+  grid-template-rows: repeat(3, auto); //3 rows
+  grid-template-columns: 1fr; //1 column
+  
+  border: 1px solid green;
+  border-radius: 15px;
+
+  //all sections
+  & div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px 15px;
+  }
+
+  //title
+  &-title {
+    grid-area: title;
+    background: blue;
+    border-radius: 10px 10px 0 0;
+  }
+
+  //status
+  &-status {
+    grid-area: status;
+    background: brown;
+  }
+
+  //description
+  &-description {
+    grid-area: description;
+    background: green;
+    border-radius: 0 0 10px 10px;
+  }
+}
+

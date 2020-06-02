@@ -9,11 +9,12 @@ const pool = new Pool({
 
 const getBugs = () => {
   return new Promise( (resolve, reject) => {
-    pool.query('SELECT * FROM bugs ORDER BY id ASC', (error, results) => {
+    pool.query('SELECT * FROM tracker.bugs', (error, results) => {
       if (error) {
         reject(error);
       }
-      resolve(results.rows);
+      resolve(results);
+      // resolve(results.rows);
     })
   })
 }
@@ -21,7 +22,7 @@ const getBugs = () => {
 const createBug = (body) => {
   return new Promise( (resolve, reject) => {
     const {title, status, description} = body;
-    pool.query('INSERT INTO bugs (title, status, description) VALUES ($1, $2, $3) RETURNING *', [name, email], (error, results) => {
+    pool.query('INSERT INTO bugs (title, status, description) VALUES ($1, $2, $3) RETURNING *', [title, status, description], (error, results) => {
       if (error) {
         reject(error);
       }
@@ -31,7 +32,7 @@ const createBug = (body) => {
 }
 
 const deleteBug = () => {
-  return new Promise(function(resolve, reject) {
+  return new Promise( (resolve, reject) => {
     const id = parseInt(request.params.id)
     pool.query('DELETE FROM bugs WHERE id = $1', [id], (error, results) => {
       if (error) {
