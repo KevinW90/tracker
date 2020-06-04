@@ -13,7 +13,9 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "server": "cd ./src/back-end && npm run start",
+    "ui": "react-scripts start",
+    "start": "concurrently --kill-others \"npm run server\" \"npm run ui\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -33,5 +35,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "concurrently": "^5.2.0"
+  }
 }

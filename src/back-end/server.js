@@ -4,7 +4,7 @@ const app = express();
 const port = 8080;
 
 // models //
-const bug_model = require('./models/bug_model');
+const bugModel = require('./models/bug_model');
 const user_model = require('./models/user_model');
 
 // use //
@@ -19,12 +19,11 @@ app.use(function (req, res, next) {
 
 // get //
 app.get('/', function (req, res) {
-  bug_model.getBugs()
+  bugModel.getBugs()
   .then(response => {
     res.status(200).send(response);
   })
   .catch(error => {
-    console.log(error);
     res.status(500).send('hello');
   })
   // res.sendFile(path.join(__dirname, 'build', 'index.html'));
@@ -33,7 +32,7 @@ app.get('/', function (req, res) {
 
 // post //
 app.post('/bugs', (req, res) => {
-  bug_model.createBug(req.body)
+  bugModel.createBug(req.body)
   .then(response => {
     res.status(200).send(response);
   })
@@ -43,8 +42,8 @@ app.post('/bugs', (req, res) => {
 })
 
 // delete //
-app.delete('/bug/:id', (req, res) => {
-  bug_model.deleteMerchant(req.params.id)
+app.delete('/bugs/:id', (req, res) => {
+  bugModel.deleteBug(req.params.id)
   .then(response => {
     res.status(200).send(response);
   })

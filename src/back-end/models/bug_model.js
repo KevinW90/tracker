@@ -1,20 +1,20 @@
-const Pool = require('pg').Pool;
-const pool = new Pool({
-  user: 'kevin',
+const {Client} = require('pg');
+const client = new Client({
   host: 'localhost',
-  database: 'tracker',
+  port: 5432,
+  user: 'kevin',
   password: 'password',
-  port: 5432
+  database: 'tracker'
 });
+client.connect();
 
 const getBugs = () => {
   return new Promise( (resolve, reject) => {
-    pool.query('SELECT * FROM tracker.bugs', (error, results) => {
+    client.query('SELECT * FROM bugs', (error, results) => {
       if (error) {
         reject(error);
       }
-      resolve(results);
-      // resolve(results.rows);
+      resolve(results.rows);
     })
   })
 }
@@ -22,7 +22,7 @@ const getBugs = () => {
 const createBug = (body) => {
   return new Promise( (resolve, reject) => {
     const {title, status, description} = body;
-    pool.query('INSERT INTO bugs (title, status, description) VALUES ($1, $2, $3) RETURNING *', [title, status, description], (error, results) => {
+    client.query('INSERT INTO bugs (title, status, description) VALUES ($1, $2, $3) RETURNING *', [title, status, description], (error, results) => {
       if (error) {
         reject(error);
       }
@@ -31,10 +31,10 @@ const createBug = (body) => {
   })
 }
 
-const deleteBug = () => {
+const deleteBug = (paramId) => {
   return new Promise( (resolve, reject) => {
-    const id = parseInt(request.params.id)
-    pool.query('DELETE FROM bugs WHERE id = $1', [id], (error, results) => {
+    const id = parseInt(paramId);
+    client.query('DELETE FROM bugs WHERE id = $1', [id], (error, results) => {
       if (error) {
         reject(error)
       }
