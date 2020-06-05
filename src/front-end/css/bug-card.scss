@@ -1,5 +1,7 @@
 .bug-card {
-  max-width: 300px;
+  position: relative; //for placing trash icon
+  min-width: 300px;
+  max-width: 350px;
   display: grid;
   grid-template-areas: "title       title       title"
                        "status      status      status"
@@ -7,11 +9,26 @@
   grid-template-rows: repeat(3, auto); //3 rows
   grid-template-columns: 1fr; //1 column
   
-  border: 1px solid green;
-  border-radius: 15px;
+  border: 1px solid black;
+  border-radius: 25px;
+
+  box-shadow: 5px 5px 5px rgba(0,0,0,.4),
+              -5px -5px 5px rgba(255,255,255,.9);
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    // z-index: 1;
+    background: transparent;
+    border-radius: 25px;
+    box-shadow: inset 5px 5px 5px rgba(0,0,0,.6),
+                inset -5px -5px 5px white;
+  }
 
   //all sections
-  & div {
+  & > div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,21 +39,123 @@
   //title
   &-title {
     grid-area: title;
-    background: blue;
-    border-radius: 10px 10px 0 0;
+    background: black;
+    color: white;
+    font-size: 1.5rem;
+    font-variant: small-caps;
+    border-radius: 20px 20px 0 0;
   }
 
   //status
   &-status {
     grid-area: status;
-    background: brown;
+    font-variant: small-caps;
+    font-size: 1.3rem;
+
+    border-bottom: 3px solid black;
   }
 
   //description
   &-description {
     grid-area: description;
-    background: green;
-    border-radius: 0 0 10px 10px;
+    background: #ddd;
+    color: black;
+
+    border-bottom: 3px solid black;
+    
+  }
+
+  //info
+  &-info {
+    background: #bbb;
+    display: grid !important; //override flex from bug-card > div
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    border-radius: 0 0 25px 25px;
+    font-weight: bold;
+    
+    & > div:not(:last-child) {
+      border-right: 2px solid black;
+    }
+
+    & div {
+      height: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      & .title {
+        text-decoration: underline;
+        font-variant: small-caps;
+      }
+    }
   }
 }
 
+.delete-icon {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  position: absolute;
+  top: -50%;
+  left: calc(50%);
+
+  & i {
+    position: relative; //place ::after on top
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: red;
+    // padding: 10px;
+    color: white;
+    border: 1px solid rgba(0,0,0,.4);
+    border-radius: 50%;
+
+    box-shadow: 5px 5px 5px rgba(0,0,0,.4),
+              -5px -5px 5px rgba(255,255,255,.9);
+              // inset -2px -2px 5px white,
+              // inset 3px 3px 1px rgba(0,0,0,.2);
+
+    &::after {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(-30deg, rgba(255,255,255,.0001) 5%, 
+                                          rgba(255,255,255,.5));
+      z-index: -1;
+    }
+  }
+}
+
+.btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  color: white;
+  background: blue;
+  font-variant: small-caps;
+  border: 1px solid rgba(0,0,0,.4);
+  box-shadow: 2px 2px 2px rgba(0,0,0,.4),
+              -2px -2px 2px rgba(255,255,255,.9);
+  border-radius: 10px;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(-30deg, rgba(255,255,255,.0001) 5%, 
+                                        rgba(255,255,255,.5));
+  }
+}

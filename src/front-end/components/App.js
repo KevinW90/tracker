@@ -63,15 +63,9 @@ function App() {
       });
   }
 
-  const displayBugs = () => {
-    console.log(Array.isArray(bugs))
-  }
-
   return (
     <div>
-      {/* {displayBugs()} */}
       {bugs ? bugs.map( b => <BugCard {...b}/>) : 'no bugs'}
-      {/* {bugs} */}
       <br />
       <button onClick={createBug}>Add bug</button>
       <br />

@@ -24,7 +24,7 @@ app.get('/', function (req, res) {
     res.status(200).send(response);
   })
   .catch(error => {
-    res.status(500).send('hello');
+    res.status(500).send(error);
   })
   // res.sendFile(path.join(__dirname, 'build', 'index.html'));
   // res.status(200).send('Hello World!');
