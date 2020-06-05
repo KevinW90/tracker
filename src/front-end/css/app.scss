@@ -1,3 +1,5 @@
+@import './variables';
+
 *{
   box-sizing: border-box;
 }
@@ -10,7 +12,7 @@ html, body {
 }
 
 body {
-  background: #d3d4d8;
+  background: $grey4;
 
   display: flex;
   justify-content: center;

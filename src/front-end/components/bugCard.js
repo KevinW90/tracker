@@ -2,20 +2,15 @@ import React from 'react';
 
 import '../css/bug-card.scss';
 
+import Button from './button';
+
 const bugCard = ({id, title, status, description}) => {
-  // set status section color
-  let color = '';
-  switch (status) {
-    case "submitted": color = "#ff4c4c"; break;
-    case "in progress": color = "#ffff00"; break;
-    case "resolved": color = "#4ca64c"; break;
-    default: color = "blue";
-  }
+  let statusClass = status.replace(' ', '-');
 
   return (
     <div className="bug-card" id={id}>
       <div className="bug-card-title">{title}</div>
-      <div className="bug-card-status" style={{background: `${color}`}}>{status}</div>
+      <div className={`bug-card-status ${statusClass}`}></div>
       <div className="bug-card-description">{description}</div>
       <div className="bug-card-info">
         <div className="date-submitted">
@@ -23,13 +18,15 @@ const bugCard = ({id, title, status, description}) => {
           <div className="date">02/26/24</div>
         </div>
         <div className="date-resolved">
-          <div className="title">resolved</div>
-          <div className="btn">resolve</div>
+          {status === 'resolved' ? 
+            <div className="title">resolved</div>
+            :
+            <Button text="resolve" />}
         </div>
       </div>
 
-      <div className="delete-icon">
-        <i className="fas fa-trash"></i>
+      <div className="delete">
+        <Button text="" icon="trash"/>
       </div>
     </div>
   );
