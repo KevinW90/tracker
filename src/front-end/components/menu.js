@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../css/menu.scss';
 
-const menu = () => {
+const menu = (props) => {
   return (
     <div className="menu">
       <div className="logo">
@@ -11,7 +11,7 @@ const menu = () => {
 
       <div className="menu-items">
         <div className="menu-item">
-          <div className="btn">
+          <div className="btn" onClick={props.createBug}>
             <i className="fas fa-plus"></i>
             Add Bug
           </div>

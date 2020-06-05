@@ -2,10 +2,10 @@ import React from 'react';
 
 import '../css/button.scss';
 
-const button = ({type, text, icon}) => {
+const button = ({text}) => {
   //type is round or rect
   return (
-    <div className={`btn btn-${type} fas fa-${icon}`}>
+    <div className="btn">
       {text}
     </div>
   );

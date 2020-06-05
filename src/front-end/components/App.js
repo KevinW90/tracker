@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import '../css/app.scss';
 
+import Menu from './menu';
 import BugCard from './bugCard';
 
 function App() {
@@ -46,8 +47,7 @@ function App() {
       });
   }
 
-  const deleteBug = () => {
-    let id = prompt('Enter bug id');
+  const deleteBug = (id) => {
     fetch(`http://localhost:8080/bugs/${id}`, {
       method: 'DELETE',
       headers: {
@@ -65,11 +65,8 @@ function App() {
 
   return (
     <div>
-      {bugs ? bugs.map( b => <BugCard {...b}/>) : 'no bugs'}
-      <br />
-      <button onClick={createBug}>Add bug</button>
-      <br />
-      <button onClick={deleteBug}>Delete bug</button>
+      <Menu createBug={createBug}/>
+      {bugs ? bugs.map( b => <BugCard {...b} deleteBug={deleteBug}/>) : 'no bugs'}
     </div>
   );
 }

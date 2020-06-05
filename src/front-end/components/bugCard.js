@@ -4,9 +4,8 @@ import '../css/bug-card.scss';
 
 import Button from './button';
 
-const bugCard = ({id, title, status, description}) => {
+const bugCard = ({id, title, status, description, deleteBug}) => {
   let statusClass = status.replace(' ', '-');
-
   return (
     <div className="bug-card" id={id}>
       <div className="bug-card-title">{title}</div>
@@ -26,7 +25,7 @@ const bugCard = ({id, title, status, description}) => {
       </div>
 
       <div className="delete">
-        <Button text="" icon="trash"/>
+        <i className="btn fas fa-trash" onClick={() => deleteBug(id)}></i>
       </div>
     </div>
   );
