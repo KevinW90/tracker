@@ -18,3 +18,14 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.content {
+  //takes up all screen space minus 1rem margin-all
+  position: absolute;
+  top: 1rem;
+  left: 16rem; //1rem space between menu and content
+  width: calc(100% - 17rem); 
+  height: calc(100% - 2rem);
+
+  
+}

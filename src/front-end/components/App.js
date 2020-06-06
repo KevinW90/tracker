@@ -66,7 +66,12 @@ function App() {
   return (
     <div>
       <Menu createBug={createBug}/>
-      {bugs ? bugs.map( b => <BugCard {...b} deleteBug={deleteBug}/>) : 'no bugs'}
+      <div className="content">
+        {bugs ? bugs.map( b => <BugCard {...b} deleteBug={deleteBug}/>) 
+                : 
+                'no bugs'}
+      </div>
+      
     </div>
   );
 }
