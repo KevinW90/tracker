@@ -44,16 +44,13 @@ const deleteBug = (paramId) => {
 }
 
 const resolveBug = (body) => {
-  console.log('inside resolveBug')
   return new Promise( (resolve, reject) => {
-    console.log('in promise')
     const {id, resolution} = body;
-    console.log('ttttttttttttt')
+    let status = "resolved";
     // id = parseInt(id);
     console.log('about to query')
-    client.query('UPDATE bugs SET resolution = $2 where id = $1', [id,resolution], (error, results) => {
+    client.query('UPDATE bugs SET resolution = $3, status = $2 where id = $1', [id,status,resolution], (error, results) => {
       if (error) {
-        console.log(error, 'hi')
         reject(error)
       }
       resolve(`Bug resolution added with ID: ${id}`)

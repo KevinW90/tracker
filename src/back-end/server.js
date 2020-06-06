@@ -33,7 +33,7 @@ app.get('/', function (req, res) {
 // post //
 app.post('/bugs', (req, res) => {
   //create bug has four keys
-  //resolve bug has two keys
+  //resolve bug has three keys
   console.log(req.body);
   //req.body is an object
   //if req.body has four keys, call create

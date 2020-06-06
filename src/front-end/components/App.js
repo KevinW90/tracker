@@ -10,6 +10,11 @@ function App() {
 
   useEffect(() => {
     getBug();
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = "flexgrid.js";
+
+    document.head.appendChild(script);
   }, []);
 
   const getBug = () => {
@@ -61,7 +66,7 @@ function App() {
       });
   }
 
-  const resolveBug = (id) => {
+  const resolveBug = (id, status) => {
     console.log('resolve', id)
     let resolution = prompt('Enter resolution.')
     fetch('http://localhost:8080/bugs', {
@@ -83,10 +88,11 @@ function App() {
   return (
     <div>
       <Menu createBug={createBug}/>
-      <div className="content">
+      <div className="main">
         {bugs ? bugs.map( b => <BugCard {...b} 
                                         deleteBug={deleteBug}
-                                        resolveBug={resolveBug}/>) 
+                                        resolveBug={resolveBug}
+                                        key={b.id}/>) 
                 : 
                 'no bugs'}
       </div>
