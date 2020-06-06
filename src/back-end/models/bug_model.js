@@ -43,8 +43,27 @@ const deleteBug = (paramId) => {
   })
 }
 
+const resolveBug = (body) => {
+  console.log('inside resolveBug')
+  return new Promise( (resolve, reject) => {
+    console.log('in promise')
+    const {id, resolution} = body;
+    console.log('ttttttttttttt')
+    // id = parseInt(id);
+    console.log('about to query')
+    client.query('UPDATE bugs SET resolution = $2 where id = $1', [id,resolution], (error, results) => {
+      if (error) {
+        console.log(error, 'hi')
+        reject(error)
+      }
+      resolve(`Bug resolution added with ID: ${id}`)
+    })
+  })
+}
+
 module.exports = {
   getBugs,
   createBug,
-  deleteBug
+  deleteBug,
+  resolveBug
 }

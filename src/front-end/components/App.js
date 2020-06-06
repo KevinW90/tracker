@@ -9,19 +9,16 @@ function App() {
   const [bugs, setBugs] = useState([]);
 
   useEffect(() => {
-    console.log('component did mount')
     getBug();
   }, []);
 
   const getBug = () => {
-    console.log('initial fetch')
     fetch('http://localhost:8080')
       .then(response => {
-        console.log('response from app');
         return response.json();
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
         setBugs(data);
       });
   }
@@ -30,13 +27,14 @@ function App() {
     let title = prompt('Enter bug title');
     let status = 'submitted';
     let description = prompt('Enter the bug description');
+    let resolution = '';
 
     fetch('http://localhost:8080/bugs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({title, status, description}),
+      body: JSON.stringify({title, status, description, resolution}),
     })
       .then(response => {
         return response.text();
@@ -63,11 +61,32 @@ function App() {
       });
   }
 
+  const resolveBug = (id) => {
+    console.log('resolve', id)
+    let resolution = prompt('Enter resolution.')
+    fetch('http://localhost:8080/bugs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({id,resolution})
+    })
+    .then(response => {
+      return response.text();
+    })
+    .then(data => {
+      alert(data);
+      getBug();
+    })
+  }
+
   return (
     <div>
       <Menu createBug={createBug}/>
       <div className="content">
-        {bugs ? bugs.map( b => <BugCard {...b} deleteBug={deleteBug}/>) 
+        {bugs ? bugs.map( b => <BugCard {...b} 
+                                        deleteBug={deleteBug}
+                                        resolveBug={resolveBug}/>) 
                 : 
                 'no bugs'}
       </div>

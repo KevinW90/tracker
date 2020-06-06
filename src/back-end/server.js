@@ -32,13 +32,29 @@ app.get('/', function (req, res) {
 
 // post //
 app.post('/bugs', (req, res) => {
-  bugModel.createBug(req.body)
-  .then(response => {
-    res.status(200).send(response);
-  })
-  .catch(error => {
-    res.status(500).send(error);
-  })
+  //create bug has four keys
+  //resolve bug has two keys
+  console.log(req.body);
+  //req.body is an object
+  //if req.body has four keys, call create
+  if (Object.keys(req.body).length === 4) {
+    bugModel.createBug(req.body)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+  } else if (Object.keys(req.body).length === 2) {
+    console.log('resolving bug')
+    bugModel.resolveBug(req.body)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+  }
 })
 
 // delete //
@@ -54,5 +70,5 @@ app.delete('/bugs/:id', (req, res) => {
 
 // listen //
 app.listen(process.env.PORT || port, () => {
-  console.log(`app running at port : ${port}`);
+  console.log(`server running at port : ${port}`);
 }); //includes Heroku deployment option
