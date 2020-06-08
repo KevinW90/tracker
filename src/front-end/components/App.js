@@ -32,14 +32,20 @@ function App() {
     let title = prompt('Enter bug title');
     let status = 'submitted';
     let description = prompt('Enter the bug description');
-    let resolution = '';
+    // current date
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+    let submitted = mm + '/' + dd + '/' + yyyy;
+    ///////////
 
     fetch('http://localhost:8080/bugs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({title, status, description, resolution}),
+      body: JSON.stringify({title, status, description, submitted}),
     })
       .then(response => {
         return response.text();

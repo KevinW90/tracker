@@ -4,7 +4,7 @@ import '../css/bug-card.scss';
 import '../css/button.scss';
 
 
-const bugCard = ({id, title, status, description, resolution, deleteBug, resolveBug}) => {
+const bugCard = ({id, title, status, description, resolution, submitted, deleteBug, resolveBug}) => {
   let statusClass = status.replace(' ', '-');
   return (
     <div className="bug-card" id={id}>
@@ -15,7 +15,7 @@ const bugCard = ({id, title, status, description, resolution, deleteBug, resolve
         <div className="bug-card-info">
           <div className="date-submitted">
             <div className="title">submitted</div>
-            <div className="date">02/26/24</div>
+            <div className="date">{submitted}</div>
           </div>
           <div className="date-resolved">
             {status === 'resolved' ? 

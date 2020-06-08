@@ -21,8 +21,8 @@ const getBugs = () => {
 
 const createBug = (body) => {
   return new Promise( (resolve, reject) => {
-    const {title, status, description} = body;
-    client.query('INSERT INTO bugs (title, status, description) VALUES ($1, $2, $3) RETURNING *', [title, status, description], (error, results) => {
+    const {title, status, description, submitted} = body;
+    client.query('INSERT INTO bugs (title, status, description, submitted) VALUES ($1, $2, $3, $4) RETURNING *', [title, status, description, submitted], (error, results) => {
       if (error) {
         reject(error);
       }
