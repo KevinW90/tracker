@@ -34,7 +34,6 @@ app.get('/', function (req, res) {
 app.post('/bugs', (req, res) => {
   //create bug has four keys
   //resolve bug has three keys
-  console.log(req.body);
   //req.body is an object
   //if req.body has four keys, call create
   if (Object.keys(req.body).length === 4) {
@@ -46,7 +45,6 @@ app.post('/bugs', (req, res) => {
       res.status(500).send(error);
     })
   } else if (Object.keys(req.body).length === 3) {
-    console.log('resolving bug')
     bugModel.resolveBug(req.body)
     .then(response => {
       res.status(200).send(response);

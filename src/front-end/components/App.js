@@ -23,7 +23,6 @@ function App() {
         return response.json();
       })
       .then(data => {
-        // console.log(data);
         setBugs(data);
       });
   }
@@ -51,7 +50,6 @@ function App() {
         return response.text();
       })
       .then(data => {
-        alert(data);
         getBug();
       });
   }
@@ -67,13 +65,11 @@ function App() {
         return response.text();
       })
       .then(data => {
-        alert(data);
         getBug();
       });
   }
 
   const resolveBug = (id, status) => {
-    console.log('resolve', id);
     // current date
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
@@ -93,7 +89,6 @@ function App() {
       return response.text();
     })
     .then(data => {
-      alert(data);
       getBug();
     })
   }
@@ -102,12 +97,12 @@ function App() {
     <div>
       <Menu createBug={createBug}/>
       <div className="main">
-        {bugs ? bugs.map( b => <BugCard {...b} 
+        {bugs.length === 0 ? bugs.map( b => <BugCard {...b} 
                                         deleteBug={deleteBug}
                                         resolveBug={resolveBug}
                                         key={b.id}/>) 
                 : 
-                'no bugs'}
+                console.log('there are no bugs')}
       </div>
       
     </div>
