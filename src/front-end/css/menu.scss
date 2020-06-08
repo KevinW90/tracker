@@ -1,3 +1,5 @@
+@import './variables';
+
 .menu {
   position: relative;
   width: 100%;
@@ -7,9 +9,8 @@
 
   color: white;
 
-  background: black;
-  padding: 15px;
-  border-right: 3px solid black;
+  background: $black4;
+  padding: 15px 25px;
 }
 
 .logo {
