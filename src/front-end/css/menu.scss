@@ -1,13 +1,39 @@
 .menu {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 15rem;
-  height: 100%;
-  
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   color: white;
 
-  background: #aaa;
+  background: black;
   padding: 15px;
   border-right: 3px solid black;
+}
+
+.logo {
+  position: absolute;
+  flex: 0 1 auto;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+
+  & i {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  & .title {
+    font-variant: small-caps;
+    letter-spacing: 5px;
+  }
+}
+
+.menu-item {
+  font-size: 1.3rem;
+
+  & .btn i {
+    margin-right: 10px;
+  }
 }
