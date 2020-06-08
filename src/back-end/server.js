@@ -45,7 +45,7 @@ app.post('/bugs', (req, res) => {
     .catch(error => {
       res.status(500).send(error);
     })
-  } else if (Object.keys(req.body).length === 2) {
+  } else if (Object.keys(req.body).length === 3) {
     console.log('resolving bug')
     bugModel.resolveBug(req.body)
     .then(response => {

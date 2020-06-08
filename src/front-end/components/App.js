@@ -73,14 +73,21 @@ function App() {
   }
 
   const resolveBug = (id, status) => {
-    console.log('resolve', id)
+    console.log('resolve', id);
+    // current date
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+    let resolved = mm + '/' + dd + '/' + yyyy;
+    ///////////
     let resolution = prompt('Enter resolution.')
     fetch('http://localhost:8080/bugs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({id,resolution})
+      body: JSON.stringify({id,resolution, resolved})
     })
     .then(response => {
       return response.text();

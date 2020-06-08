@@ -45,11 +45,9 @@ const deleteBug = (paramId) => {
 
 const resolveBug = (body) => {
   return new Promise( (resolve, reject) => {
-    const {id, resolution} = body;
+    const {id, resolution, resolved} = body;
     let status = "resolved";
-    // id = parseInt(id);
-    console.log('about to query')
-    client.query('UPDATE bugs SET resolution = $3, status = $2 where id = $1', [id,status,resolution], (error, results) => {
+    client.query('UPDATE bugs SET resolution = $3, status = $2, resolved = $4 where id = $1', [id,status,resolution,resolved], (error, results) => {
       if (error) {
         reject(error)
       }
